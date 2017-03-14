@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+## todo
+- [ ] 使用av-ts 或者 vue-class-component 来编写
+- [ ] 搞清楚这些注解都是些什么关系
+
 ## Build Setup
 
 ``` bash
