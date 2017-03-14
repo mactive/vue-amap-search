@@ -1,0 +1,49 @@
+/*
+    VS Code编译TypeScript时的配置文件，用于设定编译选项，以及忽略列表
+    在VSCode中按【Shift+Command+B】键启动任务，会自动watch所有.ts文件变更并自动编译为.js文件
+    当ts文件变更目录，更名，以及新增或移除ts文件后，需重启任务，以watch新文件列表
+    详见：https://code.visualstudio.com/docs/editor/tasks
+    
+    2016年04月11日
+    --jicanghai
+*/
+{
+    "compilerOptions": {
+        //模块加载器规范
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "allowJs": false,
+        // decorators
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        //监听变更输出文件
+        "watch": false,
+        //代码可以使用es标准
+        "lib": ["dom","es2015"],
+        //编译目标
+        "target": "es5",
+        //生成.map文件
+        "sourceMap": false,
+        //是否移除注释
+        "removeComments": false,
+
+        //是否生成.d.ts定义文件，建议在编译组件时开启，编译业务代码时关闭
+        "declaration": false,
+        "noImplicitAny": true,
+        // 未知
+        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true
+    },
+    "exclude": [
+        //忽略安装的第三方NPM模块的定义文件
+        "node_modules",
+        //忽略typings安装的browser文件夹下的.d.ts定义文件
+        "typings/browser.d.ts",
+        "typings/browser"
+    ],
+    "include": [
+        "./**/*.ts"
+    ]
+}
