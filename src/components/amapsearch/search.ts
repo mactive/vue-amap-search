@@ -29,7 +29,7 @@ export default {
     // // 初始化 domId
     this.initAmap('amap-container',[116.397428, 39.90923]);
     // // 自动完成 ''代表默认全国
-    this.initAutocomplate("autocomplate-input", 4);
+    this.initAutocomplate("autocomplate-input", 4, '北京');
   },
   mixins:[amapmixinApp],
 }

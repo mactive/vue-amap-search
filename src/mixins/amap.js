@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // TODO: 使用的袋鼠UI的inform, 今后可能要换成Vue的
 var toastDelay = 2000;
 var toast = function (msg) {
