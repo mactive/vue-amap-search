@@ -41,6 +41,7 @@ module.exports = require('./search.ts').default
   position: relative;
   width: 710px;
   height: 400px;
+  margin: 0 auto;
 }
 
 #amap-container{
@@ -56,7 +57,7 @@ module.exports = require('./search.ts').default
   box-shadow: 0px 2px 4px 0px silver;
   position: absolute;
   top: 10px;
-  left: 100px;
+  left: 150px;
   border-radius: 5px;
   overflow: hidden;
   line-height: 20px;
