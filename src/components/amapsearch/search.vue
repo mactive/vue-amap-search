@@ -1,6 +1,6 @@
 <template>
   <div id="map-container">
-    <h1>{{autocomplateInput}}</h1>
+
       <!--自动输入框-->
       <div id="autocomplate-container">
           <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
@@ -9,7 +9,26 @@
               搜索
           </button>
       </div>
+
+      <!--自定义的窗体-->
+      <div ref="marker-content" v-show="selectedPoi.location">
+          <div class="marker-content">
+              <div class="marker-content-header">
+                  <div class="marker-circle"><span class="fa fa-check"></span></div>
+                  <span class="notice">已将坐标定位为</span>
+              </div>
+              <div class="marker-info">
+                  <div class="marker-name">{{selectedPoi.name}}</div>
+                  <div class="marker-address">{{selectedPoi.address}}</div>
+              </div>
+              <a class="btn btn-success" @click="setMarkerLocation(selectedPoi.location)">确定</a>
+          </div>
+      </div>
+
+      <!--地图容器-->
       <div id="amap-container"></div>
+      <h3>{{autocomplateInput}}</h3>
+
   </div>
 </template>
 
@@ -21,7 +40,7 @@ module.exports = require('./search.ts').default
 #map-container{
   position: relative;
   width: 710px;
-  height: 340px;
+  height: 400px;
 }
 
 #amap-container{
@@ -30,7 +49,7 @@ module.exports = require('./search.ts').default
 }
 
 #autocomplate-container {
-  width: 440px;
+  width: 400px;
   z-index: 20;
   background-color: #ddf;
   color: #333;
@@ -49,7 +68,7 @@ module.exports = require('./search.ts').default
   input[type="text"] {
     height: 25px;
     border: 0;
-    width: 363px;
+    width: 360px;
     outline: none;
     height: inherit;
     line-height: inherit;
@@ -66,7 +85,7 @@ module.exports = require('./search.ts').default
     color: #fff;
     border:0;
     float:right;
-    width: 60px;
+    width: 40px;
     height: inherit;
     font-size: 12px;
     line-height: inherit;

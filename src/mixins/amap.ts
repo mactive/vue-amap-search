@@ -119,13 +119,6 @@ export var amapmixinApp = {
         amapCounty: {}, // 反查出来的高德county
         geocoder:{},
         selectedPoi: {
-          location: {
-            lat: 0,
-            lng: 0
-          },
-          address: '',
-          name: '',
-          isMoved: false
         }, 
         editingPolygon: {}, //编辑中的polygon
         mouseTool: {}

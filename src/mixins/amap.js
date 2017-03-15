@@ -12,15 +12,7 @@ exports.amapmixinApp = {
             placeSearch: {},
             amapCounty: {},
             geocoder: {},
-            selectedPoi: {
-                location: {
-                    lat: 0,
-                    lng: 0
-                },
-                address: '',
-                name: '',
-                isMoved: false
-            },
+            selectedPoi: {},
             editingPolygon: {},
             mouseTool: {}
         };
