@@ -9,14 +9,14 @@
 */
 {
     "compilerOptions": {
-        
         //模块加载器规范
         "module": "commonjs",
+        "moduleResolution": "node",
         "isolatedModules": false,
-        "allowJs": false,
         // decorators
         "experimentalDecorators": true,
-        // "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": true,
+        "suppressImplicitAnyIndexErrors": true,
         //监听变更输出文件
         "watch": false,
         //代码可以使用es标准
@@ -28,8 +28,7 @@
         //是否移除注释
         "removeComments": false,
         // 未知
-        "suppressImplicitAnyIndexErrors": true,
-        "noImplicitThis": true,
+        "noImplicitAny": true,
         "strictNullChecks": true
     },
     "exclude": [
@@ -41,5 +40,6 @@
     ],
     "include": [
         "./**/*.ts"
-    ]
+    ],
+    "compileOnSave": false
 }

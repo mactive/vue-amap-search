@@ -1,4 +1,5 @@
 import Vue = require('vue');
+import amapSearch from './components/amapsearch/search.vue'
 
 interface Preson{
   name: string;
@@ -14,5 +15,8 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App --- ' + tt.name
     }
+  },
+  components:{
+    amapSearch
   }
 }
