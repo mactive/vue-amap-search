@@ -31,4 +31,4 @@ exports.amapmixinApp = {
         // this.initAutocomplate('#complate-input-id'); // 在调用方初始化
     },
 };
-// export {amapmixinApp}; 
+// export default amapmixinApp; 

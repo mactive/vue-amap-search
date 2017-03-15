@@ -2,83 +2,85 @@ import Vue from 'vue'
 
 declare var AMap:any;
 
-export type amapType = Vue & {
-    /**
-     * 高德返回的县区信息,District对象
-     * 
-     * @type {*}
-     */
-    amapCounty: any,
-    /**
-     * 唯一的高德map对象
-     * 
-     * @type {*}
-     */
-    map: any,
-    /**
-     * 自动完成组件实例
-     * 
-     * @type {*}
-     */
-    autocomplete: any,
-    /**
-     * 关键字搜索组件实例
-     * 
-     * @type {*}
-     */
-    placeSearch: any,
-    /**
-     * geo反查的对象
-     * 
-     * @type {*}
-     */
-    geocoder: any,
-    /**
-     * 用户点击确定的poi点信息 单点
-     * 
-     * @type {{
-     *         location: {
-     *             lat: number,
-     *             lng: number
-     *         },
-     *         address: string,
-     *         name: string
-     *     }}
-     */
-    selectedPoi:{
-        location: {
-            lat: number,
-            lng: number
-        },
-        address: string,
-        name: string,
-        isMoved: boolean
-    },
+// public type
+export type amapType = {
+  /**
+   * 高德返回的县区信息,District对象
+   * 
+   * @type {*}
+   */
+  amapCounty: any,
+  /**
+   * 唯一的高德map对象
+   * 
+   * @type {*}
+   */
+  map: any,
+  /**
+   * 自动完成组件实例
+   * 
+   * @type {*}
+   */
+  autocomplete: any,
+  /**
+   * 关键字搜索组件实例
+   * 
+   * @type {*}
+   */
+  placeSearch: any,
+  /**
+   * geo反查的对象
+   * 
+   * @type {*}
+   */
+  geocoder: any,
+  /**
+   * 用户点击确定的poi点信息 单点
+   * 
+   * @type {{
+   *         location: {
+   *             lat: number,
+   *             lng: number
+   *         },
+   *         address: string,
+   *         name: string
+   *     }}
+   */
+  selectedPoi:{
+      location: {
+          lat: number,
+          lng: number
+      },
+      address: string,
+      name: string,
+      isMoved: boolean
+  },
 
-    editingPolygon: {
-        
-    } ,      // 编辑中的 editingEditor
+  editingPolygon: {
+      
+  } ,      // 编辑中的 editingEditor
 
-    mouseTool: any;
+  mouseTool: any;
 
-    /**
-     * 初始化地图组件, document.id
-     * 
-     * @param {string} domContainer
-     */
-    initAmap(domContainer:string):void;
-    /**
-     * 初始化行政区域搜索(对外接口)
-     * 
-     * @param {string} keyword
-     */
-    initAMapDistrictSearch(keyword: string, callback: Function ): void;
+  /**
+   * 初始化地图组件, document.id
+   * 
+   * @param {string} domContainer
+   */
+  initAmap(domContainer:string):void;
+  /**
+   * 初始化行政区域搜索(对外接口)
+   * 
+   * @param {string} keyword
+   */
+  initAMapDistrictSearch(keyword: string, callback: Function ): void;
 
-    
-    renderSearchMarker(poiList: poi[]): void;
+  
+  renderSearchMarker(poiList: poi[]): void;
 
-    drawPolyAreaEditer(pathArray: polygonPoint[], color: string ):any;
+  drawPolyAreaEditer(pathArray: polygonPoint[], color: string ):any;
 }
+
 
 type poi = {
     location: {
@@ -334,4 +336,4 @@ export var amapmixinApp = {
     //     }
     // }
 }
-// export {amapmixinApp};
+// export default amapmixinApp;

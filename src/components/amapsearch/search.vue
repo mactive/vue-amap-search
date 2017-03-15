@@ -1,5 +1,6 @@
 <template>
   <div id="map-container">
+    <h1>{{autocomplateInput}}</h1>
       <div id="amap-container"></div>
   </div>
 </template>
