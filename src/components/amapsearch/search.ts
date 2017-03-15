@@ -1,4 +1,4 @@
-import {amapType, amapmixinApp} from '../../mixins/amap'
+import {amapType, amapmixinApp, location} from '../../mixins/amap'
 
 import Vue from 'vue'
 
@@ -16,17 +16,20 @@ export default {
   data () {
     return {
       // 高德地图相关的 amapmixin 中使用的 
-      autocomplateInput: '222',  // 用户输入值
-      amapLocation: {},       // 经纬度信息
+      autocomplateInput: '',  // 用户输入值
+    }
+  },
+  methods:{
+    setMarkerLocation(location:location){
+      console.log(location.lng, location.lat);
     }
   },
   mounted(this:thisVue){
     console.log('search mounted');
-    console.log(this.map);
     // // 初始化 domId
-    // this.initAmap('amap-container');
+    this.initAmap('amap-container',[116.397428, 39.90923]);
     // // 自动完成 ''代表默认全国
-    // this.initAutocomplate('');
+    this.initAutocomplate("autocomplate-input", 4);
   },
   mixins:[amapmixinApp],
 }

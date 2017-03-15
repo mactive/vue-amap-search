@@ -7,17 +7,20 @@ exports.default = {
     data: function () {
         return {
             // 高德地图相关的 amapmixin 中使用的 
-            autocomplateInput: '222',
-            amapLocation: {},
+            autocomplateInput: '',
         };
+    },
+    methods: {
+        setMarkerLocation: function (location) {
+            console.log(location.lng, location.lat);
+        }
     },
     mounted: function () {
         console.log('search mounted');
-        console.log(this.map);
         // // 初始化 domId
-        // this.initAmap('amap-container');
+        this.initAmap('amap-container', [116.397428, 39.90923]);
         // // 自动完成 ''代表默认全国
-        // this.initAutocomplate('');
+        this.initAutocomplate("autocomplate-input", 4);
     },
     mixins: [amap_1.amapmixinApp],
 };

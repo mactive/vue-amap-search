@@ -1,6 +1,14 @@
 <template>
   <div id="map-container">
     <h1>{{autocomplateInput}}</h1>
+      <!--自动输入框-->
+      <div id="autocomplate-container">
+          <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
+          placeholder="输入门店详细地址,越详细定位越精准"/>
+          <button @click="searchDefaultSuggestion">
+              搜索
+          </button>
+      </div>
       <div id="amap-container"></div>
   </div>
 </template>
@@ -41,7 +49,7 @@ module.exports = require('./search.ts').default
   input[type="text"] {
     height: 25px;
     border: 0;
-    width: 400px;
+    width: 363px;
     outline: none;
     height: inherit;
     line-height: inherit;
@@ -58,9 +66,9 @@ module.exports = require('./search.ts').default
     color: #fff;
     border:0;
     float:right;
-    width: 40px;
+    width: 60px;
     height: inherit;
-    font-size: 16px;
+    font-size: 12px;
     line-height: inherit;
   }
 }
