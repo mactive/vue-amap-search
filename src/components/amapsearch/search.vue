@@ -39,14 +39,14 @@ module.exports = require('./search.ts').default
 <style lang="scss">
 #map-container{
   position: relative;
-  width: 710px;
-  height: 400px;
+  width: 800px;
+  height: 700px;
   margin: 0 auto;
 }
 
 #amap-container{
-  width: 710px;
-  height: 340px;
+  width: 800px;
+  height: 540px;
 }
 
 #autocomplate-container {
