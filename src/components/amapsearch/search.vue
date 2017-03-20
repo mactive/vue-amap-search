@@ -1,34 +1,29 @@
 <template>
-  <div id="map-container">
+  <div class="map-container">
+    <!--自动输入框-->
+    <div class="autocomplate-container">
+        <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
+        placeholder="输入详细地址,越详细定位越精准"/>
+        <button @click="searchDefaultSuggestion">
+            搜索
+        </button>
+    </div>
 
-      <!--自动输入框-->
-      <div id="autocomplate-container">
-          <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
-          placeholder="输入门店详细地址,越详细定位越精准"/>
-          <button @click="searchDefaultSuggestion">
-              搜索
-          </button>
+    <!--自定义的窗体 marker-content -->
+    <div ref="marker-content" class="marker-content" v-show="selectedPoi.location">
+      <div class="marker-content-header">
+          <div class="marker-circle"><span class="fa fa-check"></span></div>
+          <span class="notice">已将坐标定位为</span>
       </div>
-
-      <!--自定义的窗体-->
-      <div ref="marker-content" v-show="selectedPoi.location">
-          <div class="marker-content">
-              <div class="marker-content-header">
-                  <div class="marker-circle"><span class="fa fa-check"></span></div>
-                  <span class="notice">已将坐标定位为</span>
-              </div>
-              <div class="marker-info">
-                  <div class="marker-name">{{selectedPoi.name}}</div>
-                  <div class="marker-address">{{selectedPoi.address}}</div>
-              </div>
-              <a class="btn btn-success" @click="setMarkerLocation(selectedPoi.location)">确定</a>
-          </div>
+      <div class="marker-info">
+          <div class="marker-name">{{selectedPoi.name}}</div>
+          <div class="marker-address">{{selectedPoi.address}}</div>
       </div>
+      <a class="btn btn-success" @click="setMarkerLocation(selectedPoi.location)">确定</a>
+    </div>
 
-      <!--地图容器-->
-      <div id="amap-container"></div>
-      <h3>{{autocomplateInput}}</h3>
-
+    <!--地图容器-->
+    <div id="amap-container"></div>
   </div>
 </template>
 
@@ -37,27 +32,26 @@ module.exports = require('./search.ts').default
 </script>
 
 <style lang="scss">
-#map-container{
+.map-container{
   position: relative;
-  width: 800px;
-  height: 700px;
-  margin: 0 auto;
+  width: inherit;
+  height: inherit;
 }
 
 #amap-container{
-  width: 800px;
-  height: 540px;
+  width: inherit;
+  height: inherit;
 }
 
-#autocomplate-container {
-  width: 400px;
+.autocomplate-container {
+  width: 50%;
   z-index: 20;
   background-color: #ddf;
   color: #333;
   box-shadow: 0px 2px 4px 0px silver;
   position: absolute;
   top: 10px;
-  left: 150px;
+  left: 25%;
   border-radius: 5px;
   overflow: hidden;
   line-height: 20px;

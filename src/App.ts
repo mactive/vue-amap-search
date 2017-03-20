@@ -5,7 +5,7 @@ interface Preson{
   name: string;
 }
 
-let tt:Preson= {
+let MrRight:Preson= {
   name: 'Mr. Right'
 }
 
@@ -13,7 +13,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App --- ' + tt.name
+      msg: 'Welcome to Your Vue.js App --- ' + MrRight.name
     }
   },
   components:{

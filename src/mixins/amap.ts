@@ -290,30 +290,32 @@ export var amapmixinApp = {
             }
         },
 
-    //     /**
-    //      * 相应区域变化改变地图的中心点
-    //      */
-    //     initAMapDistrictSearch(keyword, callback) {
-    //         let vm = this;
-    //         AMap.service('AMap.DistrictSearch', function () {
-    //             var opts = {
-    //                 subdistrict: 1,   //返回下一级行政区
-    //                 extensions: 'base',  // 不返回行政区边界坐标点
-    //                 showbiz: false,
-    //                 level: 'district'  //查询行政级别为 县
-    //             };
-    //             //实例化DistrictSearch
-    //             let district = new AMap.DistrictSearch(opts);
-    //             //行政区查询
-    //             district.search(keyword, function (status, result) {
-    //                 let county = result.districtList[0];
-    //                 // 设置地图中心点
-    //                 vm.map.setCenter(county.center);
-    //                 vm.map.setZoom(12);
-    //                 callback(county);
-    //             });
-    //         });
-    //     },
+        /**
+         * TODO:下一步功能
+         * 改变行政区划的时候改变相应的区域
+         * 用户选择北京的时候, 直接改变区域中心点
+         */
+        initAMapDistrictSearch(keyword: string, callback: any) {
+            let vm = this;
+            AMap.service('AMap.DistrictSearch', function () {
+                var opts = {
+                    subdistrict: 1,   //返回下一级行政区
+                    extensions: 'base',  // 不返回行政区边界坐标点
+                    showbiz: false,
+                    level: 'district'  //查询行政级别为 县
+                };
+                //实例化DistrictSearch
+                let district = new AMap.DistrictSearch(opts);
+                //行政区查询
+                district.search(keyword, function (status:string, result:any) {
+                    let county = result.districtList[0];
+                    // 设置地图中心点
+                    vm.map.setCenter(county.center);
+                    vm.map.setZoom(12);
+                    callback(county);
+                });
+            });
+        },
 
     //     /**
     //      * 绘制多个polygonEditor

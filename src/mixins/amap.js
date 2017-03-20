@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // TODO: 使用的袋鼠UI的inform, 今后可能要换成Vue的
 var toastDelay = 2000;
 var toast = function (msg) {
@@ -168,6 +167,32 @@ exports.amapmixinApp = {
                 var poi = poiList_1[_i];
                 _loop_1(poi);
             }
+        },
+        /**
+         * TODO:下一步功能
+         * 改变行政区划的时候改变相应的区域
+         * 用户选择北京的时候, 直接改变区域中心点
+         */
+        initAMapDistrictSearch: function (keyword, callback) {
+            var vm = this;
+            AMap.service('AMap.DistrictSearch', function () {
+                var opts = {
+                    subdistrict: 1,
+                    extensions: 'base',
+                    showbiz: false,
+                    level: 'district' //查询行政级别为 县
+                };
+                //实例化DistrictSearch
+                var district = new AMap.DistrictSearch(opts);
+                //行政区查询
+                district.search(keyword, function (status, result) {
+                    var county = result.districtList[0];
+                    // 设置地图中心点
+                    vm.map.setCenter(county.center);
+                    vm.map.setZoom(12);
+                    callback(county);
+                });
+            });
         },
     }
 };
