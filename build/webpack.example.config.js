@@ -1,10 +1,13 @@
 var path = require('path')
 var webpack = require('webpack')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 module.exports = {
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: resolve('dist'),
     publicPath: '/dist',
     filename: 'build.js'
   },
