@@ -7,7 +7,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  entry: './src/main.ts',
+  entry: './src/components/amapsearch/search.vue',
   output: {
     path: resolve('dist/lib'),
     // publicPath: '/dist',

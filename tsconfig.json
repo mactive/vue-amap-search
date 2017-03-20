@@ -13,6 +13,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "isolatedModules": false,
+        "allowJs": true,
         // decorators
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,

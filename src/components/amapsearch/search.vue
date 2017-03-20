@@ -4,9 +4,9 @@
     <div class="autocomplate-container">
         <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
         placeholder="输入详细地址,越详细定位越精准"/>
-        <button @click="searchDefaultSuggestion">
+        <a class="search"@click="searchDefaultSuggestion">
             搜索
-        </button>
+        </a>
     </div>
 
     <!--自定义的窗体 marker-content -->
@@ -44,7 +44,7 @@ module.exports = require('./search.ts').default
 }
 
 .autocomplate-container {
-  width: 50%;
+  width: 400px;
   z-index: 20;
   background-color: #ddf;
   color: #333;
@@ -75,7 +75,7 @@ module.exports = require('./search.ts').default
     }
   }
 
-  button {
+  a.search {
     background: #06C1AE;
     color: #fff;
     border:0;
