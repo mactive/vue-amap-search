@@ -9,8 +9,8 @@
     </div>
     
     <h3>高德gcj02 坐标系</h3>
-    <h4>{{userInput}}</h4>
-    <h4>{{pickedLocation.lat}},{{pickedLocation.lng}}</h4>
+    <p><code>用户输入 </code> {{userInput}}</p>
+    <p><code>用户点击确定后的经纬度</code> {{pickedLocation.lat}},{{pickedLocation.lng}}</p>
   </div>
 </template>
 
