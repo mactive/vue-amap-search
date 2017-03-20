@@ -7,8 +7,8 @@ function resolve (dir) {
 module.exports = {
   entry: './src/main.ts',
   output: {
-    path: resolve('dist'),
-    publicPath: '/dist',
+    path: resolve('dist/example'),
+    publicPath: '/dist/example',
     filename: 'build.js'
   },
   module: {

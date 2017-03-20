@@ -147,7 +147,7 @@ module.exports = require('./search.ts').default
 }
 
 .amap-info-sharp{
-  background-image: url(/images/marker_drop.png) !important;
+  // background-image: url(/images/marker_drop.png) !important;
   height: 13px !important;
   background-repeat: no-repeat !important;
   top: -3px  !important;
