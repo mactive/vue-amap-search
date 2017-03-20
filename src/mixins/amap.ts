@@ -342,4 +342,3 @@ export var amapmixinApp = {
     //     }
     }
 }
-// export default amapmixinApp;

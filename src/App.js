@@ -8,8 +8,18 @@ exports.default = {
     name: 'app',
     data: function () {
         return {
-            msg: 'Welcome to Your Vue.js App --- ' + MrRight.name
+            msg: 'Welcome to Your Vue.js App --- ' + MrRight.name,
+            userInput: '',
+            pickedLocation: {}
         };
+    },
+    methods: {
+        handleUserInput: function (_input) {
+            this.userInput = _input;
+        },
+        handlePickedLocation: function (location) {
+            this.pickedLocation = location;
+        }
     },
     components: {
         amapSearch: search_vue_1.default

@@ -13,7 +13,17 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App --- ' + MrRight.name
+      msg: 'Welcome to Your Vue.js App --- ' + MrRight.name,
+      userInput: '',
+      pickedLocation: {}
+    }
+  },
+  methods:{
+    handleUserInput: function(_input:string){
+      this.userInput = _input;
+    },
+    handlePickedLocation: function(location: any){
+      this.pickedLocation = location;
     }
   },
   components:{

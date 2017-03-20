@@ -196,4 +196,3 @@ exports.amapmixinApp = {
         },
     }
 };
-// export default amapmixinApp; 

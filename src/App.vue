@@ -1,9 +1,16 @@
 <template>
   <div id="app">
     <div class="amap-search">
-      <amap-search :searchCount="5">
+      <amap-search 
+        :searchCount="5" 
+        @userInput="handleUserInput"
+        @pickedLocation="handlePickedLocation">
       </amap-search>
     </div>
+    
+    <h3>高德gcj02 坐标系</h3>
+    <h4>{{userInput}}</h4>
+    <h4>{{pickedLocation.lat}},{{pickedLocation.lng}}</h4>
   </div>
 </template>
 

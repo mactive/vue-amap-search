@@ -10,6 +10,11 @@ exports.default = {
             autocomplateInput: '',
         };
     },
+    watch: {
+        autocomplateInput: function (val, oldVal) {
+            this.$emit('userInput', val);
+        }
+    },
     props: {
         defaultLng: {
             type: Number,
@@ -34,12 +39,11 @@ exports.default = {
     },
     methods: {
         setMarkerLocation: function (location) {
-            this.$emit('setMarker', location);
-            console.log(location.lng, location.lat);
+            this.$emit('pickedLocation', location);
+            // console.log(location.lng, location.lat);
         }
     },
     mounted: function () {
-        console.log(this.searchCount);
         // // 初始化 domId
         this.initAmap('amap-container', [this.defaultLat, this.defaultLng]);
         // // 自动完成 ''代表默认全国

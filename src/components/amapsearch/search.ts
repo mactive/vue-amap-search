@@ -32,6 +32,11 @@ export default {
       autocomplateInput: '',  // 用户输入值
     }
   },
+  watch:{
+    autocomplateInput: function(this:thisVue, val:any, oldVal:any){
+      this.$emit('userInput',val);
+    }
+  },
   props:{
     defaultLng: {
       type: Number,
@@ -55,13 +60,12 @@ export default {
     }
   },
   methods:{
-    setMarkerLocation(location:location){
-      this.$emit('setMarker',location);
-      console.log(location.lng, location.lat);
+    setMarkerLocation(this:thisVue, location:location){
+      this.$emit('pickedLocation',location);
+      // console.log(location.lng, location.lat);
     }
   },
   mounted(this:thisVue){
-    console.log(this.searchCount);
     // // 初始化 domId
     this.initAmap('amap-container',[this.defaultLat, this.defaultLng]);
     // // 自动完成 ''代表默认全国
