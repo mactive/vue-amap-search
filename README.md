@@ -1,17 +1,10 @@
-# vue-typescript-realtime
+# vue-amap-search
 
-> A Vue.js project
+> A Vue.js amap 高德地图搜索功能组件
 
-## dev todo
-- [ ] 做成 amap-search 组件, 组件的实现可以用到mixin
-- [ ] 两个webpacktask, one for build, one for example
-- [ ] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
-- [ ] 输出单独的组件.js 不含
-- [ ] 单数输出css文件 和 组件本身
-- [ ] 输出组件的ts定义 d.ts文件
-- [ ] 整理目录符合components的规范
-- [ ] 使用av-ts 或者 vue-class-component 来编写
-- [ ] 搞清楚这些注解都是些什么关系
+## Demo
+
+http://www.devmeng.com/vue-amap-search/
 
 ## 如何使用
 
@@ -19,13 +12,62 @@
 > 例如: `<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&plugin=AMap.Geocoder&key=你的高德地图key"></script>`
 因为我们用到了地址->poi反查,所以要用到`plugin=AMap.Geocoder` 
 
-2. 完整的示例在 search.vue和search.ts 中
+2. 导入js和css,声明component
 
-`search.vue`中是自定义的dom结构(自动完成和弹出窗体)和自定义的css样式, 需要引入bootstrap或者类bs样式库
+单一组件内部使用
+```javascript
+import AmapSearch from 'vue-amap-search'
+import 'vue-amap-search/dist/lib/main.css'
 
-`search.ts` 中需要mounted中初始化两个方法(传入domId和poi数量的参数), 另外你可以在setMarkerLocation 函数中获得确定之后的经纬度信息
+export default {
+  // 省略
+  components:{
+      'amap-search': AmapSearch
+  }
+}
+```
+or 全局声明
 
-## Build Setup
+```javascript
+import Vue from 'vue'
+import AmapSearch from 'vue-amap-search'
+import 'vue-amap-search/dist/vue-instant.css'
+Vue.use(AmapSearch)
+```
+
+html 中使用都是一样的,及得给amap-search设定宽和高,
+```html
+<div class="amap-search">
+  <amap-search 
+    :searchCount="5" 
+    @userInput="handleUserInput"
+    @pickedLocation="handlePickedLocation">
+  </amap-search>
+</div>
+```
+
+3. event and props
+
+* 需要给amap-search设定宽和高, css
+* searchCount 返回结果的数量
+* 需要自己实现 handleUserInput 输入框中的值,和 handlePickedLocation 用户选定坐标,并点击确定后的值
+
+
+
+## TODO: 
+- [ ] 支持手点位置
+- [ ] 传入宽和高
+- [ ] 支持开关确认按钮
+- [ ] 引入toast显示
+- [ ] 做成 amap-search 组件, 组件的实现可以用到mixin
+- [ ] 优化 webpack task
+- [ ] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
+- [ ] 输出组件的ts定义 d.ts文件
+- [ ] 整理目录符合components的规范
+
+
+
+## Build Setup 二次开发或者fork
 
 ``` bash
 # install dependencies
@@ -41,5 +83,3 @@ npm run example
 npm run build
 
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
