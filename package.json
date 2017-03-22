@@ -1,9 +1,18 @@
 {
-  "name": "vue-typescript-realtime",
-  "description": "A Vue.js project",
-  "version": "1.0.0",
+  "name": "vue-amap-search",
+  "description": "vue2.x amap search component vue2.x高德地图搜索组件",
+  "version": "0.1.0",
+  "main": "dist/lib/main.js",
   "author": "mactive <mactive@gmail.com>",
-  "private": true,
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mactive/vue-amap-search/issues"
+  },
+  "keywords": [
+    "vue",
+    "amap",
+    "search"
+  ],
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.example.config.js --open --hot",
     "example": "cross-env NODE_ENV=production webpack --config build/webpack.example.config.js --progress --hide-modules",
