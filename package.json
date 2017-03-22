@@ -19,8 +19,6 @@
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
   },
   "dependencies": {
-    "extract-text-webpack-plugin": "^2.1.0",
-    "style-loader": "^0.14.1",
     "vue": "^2.2.1"
   },
   "devDependencies": {
@@ -36,6 +34,8 @@
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-server": "^2.2.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "style-loader": "^0.14.1"
   }
 }
