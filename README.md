@@ -45,6 +45,15 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
   </amap-search>
 </div>
 ```
+`<style>` 标签中加入
+```css
+.amap-search{
+  position: relative;
+  width: 800px;
+  height: 540px;
+  margin: 0 auto;
+}
+```
 
 3. event and props
 
@@ -55,15 +64,17 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 
 
 ## TODO: 
-- [ ] 支持手点位置
 - [ ] 传入宽和高
-- [ ] 支持开关确认按钮
-- [ ] 引入toast显示
-- [ ] 做成 amap-search 组件, 组件的实现可以用到mixin
-- [ ] 优化 webpack task
+- [ ] 支持手点位置
+- [ ] 支持开关确认按钮, 点击确定关闭
 - [ ] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
+- [ ] 样式自包含, 不依赖于 bootstrap 3.3版本
+- [ ] 引入toast显示, 或者第三方的toast 显示,但是不要打包
+- [x] 做成 amap-search 组件, 组件的实现可以用到mixin
+- [ ] 优化 webpack task
 - [ ] 输出组件的ts定义 d.ts文件
 - [ ] 整理目录符合components的规范
+- [ ] 多语言, 多版本, google map 规范
 
 
 

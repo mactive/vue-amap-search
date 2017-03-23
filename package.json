@@ -5,6 +5,10 @@
   "main": "dist/lib/main.js",
   "author": "mactive <mactive@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mactive/vue-amap-search.git"
+  },
   "bugs": {
     "url": "https://github.com/mactive/vue-amap-search/issues"
   },
