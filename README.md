@@ -81,6 +81,11 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 ## Build Setup 二次开发或者fork
 
 ``` bash
+
+# 需要先全局安装typescript 然后 link
+npm install typescript -g
+npm link typescript
+
 # install dependencies
 npm install
 
