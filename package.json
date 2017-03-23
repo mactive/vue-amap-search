@@ -1,7 +1,7 @@
 {
   "name": "vue-amap-search",
   "description": "vue2.x amap search component vue2.x高德地图搜索组件",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/lib/main.js",
   "author": "mactive <mactive@gmail.com>",
   "license": "MIT",
@@ -23,6 +23,8 @@
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
   },
   "dependencies": {
+    "less": "^2.7.2",
+    "less-loader": "^4.0.2",
     "vue": "^2.2.1"
   },
   "devDependencies": {
@@ -31,15 +33,13 @@
     "babel-preset-latest": "^6.0.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
-    "node-sass": "^4.5.0",
-    "sass-loader": "^5.0.1",
+    "style-loader": "^0.14.1",
     "ts-loader": "^2.0.1",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "style-loader": "^0.14.1"
+    "webpack-dev-server": "^2.2.0"
   }
 }

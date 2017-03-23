@@ -35,6 +35,19 @@ exports.default = {
             type: Number,
             default: 1,
             required: false
+        },
+        width: {
+            type: Number,
+            required: true
+        },
+        height: {
+            type: Number,
+            required: true
+        },
+        showComfirmButton: {
+            type: Boolean,
+            default: true,
+            required: false
         }
     },
     methods: {
@@ -48,6 +61,9 @@ exports.default = {
         this.initAmap('amap-container', [this.defaultLat, this.defaultLng]);
         // // 自动完成 ''代表默认全国
         this.initAutocomplate("autocomplate-input", this.searchCount, this.defaultCity);
+        // 开启单击的话 会影响拖动和marker 的click 
+        // TODO: 需要谨慎考虑一下
+        // this.initMouseTools();
     },
     mixins: [amap_1.amapmixinApp],
 };

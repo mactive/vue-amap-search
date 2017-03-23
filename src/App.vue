@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <div class="amap-search">
-      <amap-search 
-        :searchCount="5" 
-        @userInput="handleUserInput"
-        @pickedLocation="handlePickedLocation">
-      </amap-search>
-    </div>
+    <amap-search 
+      :searchCount="2" 
+      :width="800"
+      :height="540"
+      @userInput="handleUserInput"
+      @pickedLocation="handlePickedLocation">
+    </amap-search>
     
     <h3>高德gcj02 坐标系</h3>
+    <p>输入出现搜索结果, 地图上的点可以拖动, 拖动后的结果信息会出现在下方</p>
     <p><code>用户输入 </code> {{userInput}}</p>
-    <p><code>用户点击确定后的经纬度</code> {{pickedLocation.lat}},{{pickedLocation.lng}}</p>
+    <p><code>用户点击确定后的经纬度</code> {{pickedLocation.location.lat}},{{pickedLocation.location.lng}}</p>
+    <p><code>用户点击确定后的位置</code> {{pickedLocation.name}}</p>
+    <p><code>用户点击确定后的位置</code> {{pickedLocation.address}}</p>
   </div>
 </template>
 
@@ -18,7 +21,7 @@
 module.exports = require('./App.ts').default
 </script>
 
-<style lang="scss">
+<style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,11 +29,5 @@ module.exports = require('./App.ts').default
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-.amap-search{
-  position: relative;
-  width: 800px;
-  height: 540px;
-  margin: 0 auto;
 }
 </style>

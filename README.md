@@ -64,10 +64,11 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 
 
 ## TODO: 
-- [ ] 传入宽和高
-- [ ] 支持手点位置
+- [x] 传入宽和高
+- [ ] 支持手点位置, 但是和拖动有冲突. 看如何解决
+- [x] 去掉sass 改用postcss
 - [ ] 支持开关确认按钮, 点击确定关闭
-- [ ] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
+- [x] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
 - [ ] 样式自包含, 不依赖于 bootstrap 3.3版本
 - [ ] 引入toast显示, 或者第三方的toast 显示,但是不要打包
 - [x] 做成 amap-search 组件, 组件的实现可以用到mixin
@@ -82,7 +83,7 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 
 ``` bash
 
-# 需要先全局安装typescript 然后 link
+# 先安装typescript 然后 link
 npm install typescript -g
 npm link typescript
 

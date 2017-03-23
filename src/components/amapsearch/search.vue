@@ -1,25 +1,25 @@
 <template>
-  <div class="map-container">
+  <div class="amap-search__container" :style="{width: width + 'px',height: height + 'px'}">
     <!--自动输入框-->
     <div class="autocomplate-container">
         <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
+        @keyup.enter="searchDefaultSuggestion"
         placeholder="输入详细地址,越详细定位越精准"/>
-        <a class="search"@click="searchDefaultSuggestion">
+        <a class="search" @click="searchDefaultSuggestion">
             搜索
         </a>
     </div>
 
     <!--自定义的窗体 marker-content -->
-    <div ref="marker-content" class="marker-content" v-show="selectedPoi.location">
+    <div ref="marker-content" class="marker-content" v-show="selectedPoi.location.lat">
       <div class="marker-content-header">
-          <div class="marker-circle"><span class="fa fa-check"></span></div>
           <span class="notice">已将坐标定位为</span>
       </div>
       <div class="marker-info">
           <div class="marker-name">{{selectedPoi.name}}</div>
           <div class="marker-address">{{selectedPoi.address}}</div>
       </div>
-      <a class="btn btn-success" @click="setMarkerLocation(selectedPoi.location)">确定</a>
+      <a class="btn btn-success" @click="setMarkerLocation(selectedPoi)">确定</a>
     </div>
 
     <!--地图容器-->
@@ -31,11 +31,12 @@
 module.exports = require('./search.ts').default
 </script>
 
-<style lang="scss">
-.map-container{
+<style lang="less">
+.amap-search__container{
   position: relative;
   width: inherit;
   height: inherit;
+  margin: 0 auto;
 }
 
 #amap-container{
@@ -146,10 +147,10 @@ module.exports = require('./search.ts').default
   border: none !important;
 }
 
-.amap-info-sharp{
-  // background-image: url(/images/marker_drop.png) !important;
-  height: 13px !important;
-  background-repeat: no-repeat !important;
-  top: -3px  !important;
-}
+// .amap-info-sharp{
+//   background-image: url(/images/marker_drop.png) !important;
+//   height: 13px !important;
+//   background-repeat: no-repeat !important;
+//   top: -3px  !important;
+// }
 </style>

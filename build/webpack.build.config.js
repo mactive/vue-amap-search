@@ -35,8 +35,8 @@ module.exports = {
               use: 'css-loader',
               fallback: 'vue-style-loader'
             }),
-            scss:  ExtractTextPlugin.extract({
-              use: 'css-loader!sass-loader',
+            less:  ExtractTextPlugin.extract({
+              use: 'css-loader!less-loader',
               fallback: 'vue-style-loader'
             }),
           }

@@ -12,7 +12,15 @@ exports.amapmixinApp = {
             placeSearch: {},
             amapCounty: {},
             geocoder: {},
-            selectedPoi: {},
+            selectedPoi: {
+                location: {
+                    lat: 0,
+                    lng: 0
+                },
+                address: '',
+                name: '',
+                isMoved: false
+            },
             editingPolygon: {},
             mouseTool: {}
         };
@@ -85,6 +93,29 @@ exports.amapmixinApp = {
                 });
             });
         },
+        /**
+         * 地图鼠标单击事件
+         */
+        initMouseTools: function () {
+            var vm = this;
+            vm.mouseTool.marker();
+            vm.mouseTool.on('draw', function (data) {
+                vm.map.clearMap();
+                var position = data.obj.getPosition();
+                vm.geocoder.getAddress(position, function (status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        console.log(result);
+                        var _address = result.regeocode.addressComponent;
+                        var poi = {
+                            location: position,
+                            address: _address.district + _address.street + _address.streetNumber,
+                            name: result.regeocode.formattedAddress
+                        };
+                        vm.renderSearchMarker([poi], true);
+                    }
+                });
+            });
+        },
         // 如果有一个结果, 自动设置. 如果没有让用户选择
         searchDefaultSuggestion: function (event) {
             var vm = this;
@@ -111,7 +142,7 @@ exports.amapmixinApp = {
          */
         renderSearchMarker: function (poiList) {
             var vm = this;
-            var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(-9, -30) });
+            var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
             var poiIndex = 0;
             var _loop_1 = function (poi) {
                 poiIndex++;
@@ -123,11 +154,13 @@ exports.amapmixinApp = {
                 });
                 marker.content = vm.$refs["marker-content"];
                 // 默认没有移动过
-                marker.setExtData({ isMoved: false });
+                marker.setExtData({ isMoved: false, poiIndex: poiIndex });
                 marker.on('click', function (e) {
                     //  如果信息有更改
                     if (!this.getExtData().isMoved) {
-                        vm.selectedPoi = poi;
+                        vm.selectedPoi.location = poi.location;
+                        vm.selectedPoi.address = poi.address;
+                        vm.selectedPoi.name = poi.name;
                         vm.selectedPoi.isMoved = this.getExtData().isMoved;
                     }
                     infoWindow.setContent(e.target.content);
@@ -136,27 +169,27 @@ exports.amapmixinApp = {
                 // 触发一次click显示
                 marker.emit('click', { target: marker });
                 // 因为会自动触发 拖拽之后也会触发 所以在这里做检查
-                vm.setMarkerLocation(poi.location);
+                vm.setMarkerLocation(poi);
                 marker.on('dragstart', function (e) {
                     vm.map.clearInfoWindow();
                 });
                 marker.on('dragend', function (e) {
-                    marker.setExtData({ isMoved: true });
+                    var that = this;
                     console.log(e.lnglat);
+                    console.log(that.getExtData());
+                    that.setExtData({ isMoved: true });
                     var lat = e.lnglat.lat, lng = e.lnglat.lng;
-                    marker.setPosition(new AMap.LngLat(lng, lat));
+                    that.setPosition(new AMap.LngLat(lng, lat));
                     vm.geocoder.getAddress(e.lnglat, function (status, result) {
                         if (status === 'complete' && result.info === 'OK') {
                             console.log(result);
                             var _address = result.regeocode.addressComponent;
-                            vm.selectedPoi = {
-                                location: e.lnglat,
-                                address: _address.district + _address.street + _address.streetNumber,
-                                name: result.regeocode.formattedAddress,
-                                isMoved: true
-                            };
-                            console.log(vm.selectedPoi);
-                            marker.emit('click', { target: marker });
+                            vm.selectedPoi.location = e.lnglat;
+                            vm.selectedPoi.address = _address.district + _address.street + _address.streetNumber;
+                            vm.selectedPoi.name = result.regeocode.formattedAddress;
+                            vm.selectedPoi.isMoved = true;
+                            console.log(vm.selectedPoi.name);
+                            that.emit('click', { target: that });
                         }
                     });
                     // 

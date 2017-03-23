@@ -46,15 +46,7 @@ export type amapType = {
    *         name: string
    *     }}
    */
-  selectedPoi:{
-      location: {
-          lat: number,
-          lng: number
-      },
-      address: string,
-      name: string,
-      isMoved: boolean
-  },
+  selectedPoi: selectedPoi
 
   editingPolygon: {
       
@@ -79,6 +71,10 @@ export type amapType = {
   initAutocomplate(domContainer:string, pageSize: number, cityname?: string):void;
 
   /**
+   * 初始化地图上的点击标点功能
+   */
+  initMouseTools():void;
+  /**
    * 初始化行政区域搜索(对外接口)
    * 
    * @param {string} keyword
@@ -91,9 +87,20 @@ export type amapType = {
   drawPolyAreaEditer(pathArray: polygonPoint[], color: string ):any;
 }
 
+type selectedPoi ={
+      location: {
+          lat: number
+          lng: number
+      }
+      address: string
+      name: string
+      isMoved: boolean
+  }
 
-type poi = {
+export type poi = {
     location: location
+    address?: string
+    name?: string
 }
 
 export type location = {
@@ -118,7 +125,14 @@ export var amapmixinApp = {
         placeSearch: {}, // 地址搜索组件
         amapCounty: {}, // 反查出来的高德county
         geocoder:{},
-        selectedPoi: {
+        selectedPoi: <selectedPoi>{
+            location:{
+                lat: 0,
+                lng: 0
+            },
+            address: '',
+            name: '',
+            isMoved: false
         }, 
         editingPolygon: {}, //编辑中的polygon
         mouseTool: {}
@@ -202,6 +216,30 @@ export var amapmixinApp = {
                 });
             });
         },
+        /**
+         * 地图鼠标单击事件
+         */
+        initMouseTools(){
+            let vm = this;
+            vm.mouseTool.marker();
+            vm.mouseTool.on('draw',function(data: any){
+                vm.map.clearMap();
+
+                let position:location = data.obj.getPosition();
+                vm.geocoder.getAddress(position, function(status: string, result:any) {
+                    if (status === 'complete' && result.info === 'OK') {
+                        console.log(result);
+                        let _address = result.regeocode.addressComponent;
+                        var poi:poi = {
+                            location: position,
+                            address: _address.district+_address.street+_address.streetNumber,
+                            name: result.regeocode.formattedAddress
+                        }
+                        vm.renderSearchMarker([poi],true);
+                    }
+                });
+            });
+        },
 
         // 如果有一个结果, 自动设置. 如果没有让用户选择
         searchDefaultSuggestion(event:any){
@@ -232,7 +270,7 @@ export var amapmixinApp = {
         renderSearchMarker(poiList: poi[]) {
             let vm = this;
 
-            var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(-9,-30)});
+            var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(0,-30)});
 
             let poiIndex = 0;
             for(let poi of poiList){
@@ -245,11 +283,13 @@ export var amapmixinApp = {
                 });
                 marker.content = vm.$refs["marker-content"];
                 // 默认没有移动过
-                marker.setExtData({isMoved: false});
+                marker.setExtData({isMoved: false, poiIndex: poiIndex });
                 marker.on('click', function(e:any){
                     //  如果信息有更改
                     if (!this.getExtData().isMoved){
-                        vm.selectedPoi = poi ;
+                        vm.selectedPoi.location = poi.location;
+                        vm.selectedPoi.address = poi.address;
+                        vm.selectedPoi.name = poi.name;
                         vm.selectedPoi.isMoved = this.getExtData().isMoved;
                     }
                     infoWindow.setContent(e.target.content);
@@ -259,30 +299,30 @@ export var amapmixinApp = {
                 marker.emit('click',{target: marker});
 
                 // 因为会自动触发 拖拽之后也会触发 所以在这里做检查
-                vm.setMarkerLocation(poi.location);
+                vm.setMarkerLocation(poi);
 
                 marker.on('dragstart', function(e:any){
                     vm.map.clearInfoWindow();
                 });
                 marker.on('dragend', function(e:any){
-                    marker.setExtData({isMoved: true});
+                    let that = this;
                     console.log(e.lnglat);
+                    console.log(that.getExtData());
+                    that.setExtData({isMoved: true});
                     let lat = e.lnglat.lat,
                         lng = e.lnglat.lng;
-                    marker.setPosition(new AMap.LngLat(lng,lat));
+                    that.setPosition(new AMap.LngLat(lng,lat));
 
                     vm.geocoder.getAddress(e.lnglat, function(status:string, result:any) {
                         if (status === 'complete' && result.info === 'OK') {
                             console.log(result);
                             let _address = result.regeocode.addressComponent;
-                            vm.selectedPoi = {
-                                location: e.lnglat,
-                                address: _address.district+_address.street+_address.streetNumber,
-                                name: result.regeocode.formattedAddress,
-                                isMoved: true
-                            };
-                            console.log(vm.selectedPoi);
-                            marker.emit('click',{target: marker});
+                            vm.selectedPoi.location =  e.lnglat
+                            vm.selectedPoi.address = _address.district+_address.street+_address.streetNumber
+                            vm.selectedPoi.name = result.regeocode.formattedAddress
+                            vm.selectedPoi.isMoved = true
+                            console.log(vm.selectedPoi.name);
+                            that.emit('click',{target: that});
                         }
                     });        
                     // 

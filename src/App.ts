@@ -25,7 +25,9 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App --- ' + MrRight.name,
       userInput: '',
-      pickedLocation: {}
+      pickedLocation: {
+        location:{}
+      }
     }
   },
   methods:{
