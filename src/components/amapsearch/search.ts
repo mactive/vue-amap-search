@@ -14,7 +14,7 @@ interface props{
   defaultCity: string;
   width: number;
   height: number;
-  showComfirmButton: boolean;
+  autoConfirm: boolean;
 }
 
 /**
@@ -38,6 +38,17 @@ export default {
   watch:{
     autocomplateInput: function(this:thisVue, val:any, oldVal:any){
       this.$emit('userInput',val);
+    },
+    'selectedPoi.location.lat': function selectedPoiLocation(this:thisVue, newVal:location,oldVal:location){
+      /**
+       * 如果不显示确定按钮, 拖到那里是哪里的话, 
+       * searchCount 默认为1
+       */
+      if(this.autoConfirm){
+        this.selectedPoi.isMoved = false;
+        let loc = JSON.stringify(this.selectedPoi);
+        this.$emit('pickedLocation',JSON.parse(loc));
+      }
     }
   },
   props:{
@@ -69,26 +80,34 @@ export default {
       type: Number,
       required: true
     },
-    showComfirmButton:{
+    autoConfirm:{
       type: Boolean,
-      default: true,
+      default: false,
       required: false
     }
   },
   methods:{
-    setMarkerLocation(this:thisVue, location:poi){
-      this.selectedPoi.isMoved = false;
-      // 不做绑定
-      // if(showComfirmButton)
-      let loc = JSON.stringify(location);
-      this.$emit('pickedLocation',JSON.parse(loc));
+    setMarkerLocation(this:thisVue){
+      if(this.autoConfirm == false){
+        this.selectedPoi.isMoved = false;
+        let loc = JSON.stringify(this.selectedPoi);
+        this.$emit('pickedLocation',JSON.parse(loc));
+      }
     }
   },
   mounted(this:thisVue){
-    // // 初始化 domId
+    // 初始化 domId
     this.initAmap('amap-container',[this.defaultLat, this.defaultLng]);
-    // // 自动完成 ''代表默认全国
-    this.initAutocomplate("autocomplate-input", this.searchCount, this.defaultCity );
+
+    /**
+     * 如果不显示确定按钮, 拖到那里是哪里的话, 
+     * searchCount 默认为1
+     */
+    let searchCount = this.autoConfirm ? 1 : this.searchCount;
+
+    // 初始化 自动完成 ''代表默认全国
+    this.initAutocomplate("autocomplate-input", searchCount, this.defaultCity );
+
     // 开启单击的话 会影响拖动和marker 的click 
     // TODO: 需要谨慎考虑一下
     // this.initMouseTools();

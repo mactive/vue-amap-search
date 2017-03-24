@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <amap-search 
-      :searchCount="2" 
+      :searchCount="2"
+      :autoConfirm="false"
       :width="800"
-      :height="540"
+      :height="340"
       @userInput="handleUserInput"
       @pickedLocation="handlePickedLocation">
     </amap-search>

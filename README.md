@@ -57,17 +57,25 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 
 3. event and props
 
-* 需要给amap-search设定宽和高, css
+### props
+* width 宽度
+  height 高度
 * searchCount 返回结果的数量
-* 需要自己实现 handleUserInput 输入框中的值,和 handlePickedLocation 用户选定坐标,并点击确定后的值
+* autoConfirm 是否自动确认点的地址, 默认 false . 
+> 默认false, 用户点击确定后才会触发 handlePickedLocation 绑定的事件
+> 如果true,searchCount 会自动变成1
+
+### Event
+* handleUserInput 输入框中的值
+* handlePickedLocation 用户选定坐标,并点击确定后的值
 
 
 
 ## TODO: 
 - [x] 传入宽和高
-- [ ] 支持手点位置, 但是和拖动有冲突. 看如何解决
+- [ ] 支持手点位置, 但是只能有一个搜索结果结果
 - [x] 去掉sass 改用postcss
-- [ ] 支持开关确认按钮, 点击确定关闭
+- [x] 支持开关确认按钮, 点击确定关闭
 - [x] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
 - [ ] 样式自包含, 不依赖于 bootstrap 3.3版本
 - [ ] 引入toast显示, 或者第三方的toast 显示,但是不要打包

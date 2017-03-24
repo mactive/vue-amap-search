@@ -14,7 +14,8 @@
     <div ref="marker-content" class="marker-content" v-show="selectedPoi.location.lat">
       <div class="marker-content-header">
           <span v-show="selectedPoi.isMoved==false" class="notice-icon">&#9873;</span>
-          <span class="notice">已将坐标定位为</span>
+          <span v-show="selectedPoi.isMoved==false" class="notice">已将坐标定位为</span>
+          <span v-show="selectedPoi.isMoved" class="notice">坐标定位</span>
       </div>
       <div class="marker-info">
           <div class="marker-name">{{selectedPoi.name}}</div>
