@@ -19,7 +19,7 @@ exports.amapmixinApp = {
                 },
                 address: '',
                 name: '',
-                isMoved: false
+                isMoved: true
             },
             editingPolygon: {},
             mouseTool: {}
@@ -154,29 +154,26 @@ exports.amapmixinApp = {
                 });
                 marker.content = vm.$refs["marker-content"];
                 // 默认没有移动过
-                marker.setExtData({ isMoved: false, poiIndex: poiIndex });
+                marker.setExtData({ isMoved: true, poiIndex: poiIndex });
                 marker.on('click', function (e) {
                     //  如果信息有更改
-                    if (!this.getExtData().isMoved) {
-                        vm.selectedPoi.location = poi.location;
-                        vm.selectedPoi.address = poi.address;
-                        vm.selectedPoi.name = poi.name;
-                        vm.selectedPoi.isMoved = this.getExtData().isMoved;
-                    }
+                    vm.selectedPoi.location = poi.location;
+                    vm.selectedPoi.address = poi.address;
+                    vm.selectedPoi.name = poi.name;
+                    vm.selectedPoi.isMoved = this.getExtData().isMoved;
                     infoWindow.setContent(e.target.content);
                     infoWindow.open(vm.map, e.target.getPosition());
                 });
                 // 触发一次click显示
                 marker.emit('click', { target: marker });
                 // 因为会自动触发 拖拽之后也会触发 所以在这里做检查
-                vm.setMarkerLocation(poi);
+                // vm.setMarkerLocation(poi);
                 marker.on('dragstart', function (e) {
                     vm.map.clearInfoWindow();
                 });
                 marker.on('dragend', function (e) {
                     var that = this;
                     console.log(e.lnglat);
-                    console.log(that.getExtData());
                     that.setExtData({ isMoved: true });
                     var lat = e.lnglat.lat, lng = e.lnglat.lng;
                     that.setPosition(new AMap.LngLat(lng, lat));
@@ -187,9 +184,10 @@ exports.amapmixinApp = {
                             vm.selectedPoi.location = e.lnglat;
                             vm.selectedPoi.address = _address.district + _address.street + _address.streetNumber;
                             vm.selectedPoi.name = result.regeocode.formattedAddress;
-                            vm.selectedPoi.isMoved = true;
+                            vm.selectedPoi.isMoved = that.getExtData().isMoved;
                             console.log(vm.selectedPoi.name);
-                            that.emit('click', { target: that });
+                            infoWindow.setContent(e.target.content);
+                            infoWindow.open(vm.map, e.target.getPosition());
                         }
                     });
                     // 

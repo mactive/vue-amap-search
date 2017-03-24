@@ -77,8 +77,11 @@ export default {
   },
   methods:{
     setMarkerLocation(this:thisVue, location:poi){
-      this.$emit('pickedLocation',location);
-      // console.log(location.lng, location.lat);
+      this.selectedPoi.isMoved = false;
+      // 不做绑定
+      // if(showComfirmButton)
+      let loc = JSON.stringify(location);
+      this.$emit('pickedLocation',JSON.parse(loc));
     }
   },
   mounted(this:thisVue){

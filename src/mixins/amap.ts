@@ -132,7 +132,7 @@ export var amapmixinApp = {
             },
             address: '',
             name: '',
-            isMoved: false
+            isMoved: true
         }, 
         editingPolygon: {}, //编辑中的polygon
         mouseTool: {}
@@ -283,15 +283,15 @@ export var amapmixinApp = {
                 });
                 marker.content = vm.$refs["marker-content"];
                 // 默认没有移动过
-                marker.setExtData({isMoved: false, poiIndex: poiIndex });
+                marker.setExtData({isMoved: true, poiIndex: poiIndex });
                 marker.on('click', function(e:any){
                     //  如果信息有更改
-                    if (!this.getExtData().isMoved){
-                        vm.selectedPoi.location = poi.location;
-                        vm.selectedPoi.address = poi.address;
-                        vm.selectedPoi.name = poi.name;
-                        vm.selectedPoi.isMoved = this.getExtData().isMoved;
-                    }
+
+                    vm.selectedPoi.location = poi.location;
+                    vm.selectedPoi.address = poi.address;
+                    vm.selectedPoi.name = poi.name;
+                    vm.selectedPoi.isMoved = this.getExtData().isMoved;
+
                     infoWindow.setContent(e.target.content);
                     infoWindow.open(vm.map, e.target.getPosition());
                 });
@@ -299,7 +299,7 @@ export var amapmixinApp = {
                 marker.emit('click',{target: marker});
 
                 // 因为会自动触发 拖拽之后也会触发 所以在这里做检查
-                vm.setMarkerLocation(poi);
+                // vm.setMarkerLocation(poi);
 
                 marker.on('dragstart', function(e:any){
                     vm.map.clearInfoWindow();
@@ -307,7 +307,6 @@ export var amapmixinApp = {
                 marker.on('dragend', function(e:any){
                     let that = this;
                     console.log(e.lnglat);
-                    console.log(that.getExtData());
                     that.setExtData({isMoved: true});
                     let lat = e.lnglat.lat,
                         lng = e.lnglat.lng;
@@ -320,9 +319,12 @@ export var amapmixinApp = {
                             vm.selectedPoi.location =  e.lnglat
                             vm.selectedPoi.address = _address.district+_address.street+_address.streetNumber
                             vm.selectedPoi.name = result.regeocode.formattedAddress
-                            vm.selectedPoi.isMoved = true
+                            vm.selectedPoi.isMoved =  that.getExtData().isMoved
                             console.log(vm.selectedPoi.name);
-                            that.emit('click',{target: that});
+
+                            infoWindow.setContent(e.target.content);
+                            infoWindow.open(vm.map, e.target.getPosition());
+
                         }
                     });        
                     // 

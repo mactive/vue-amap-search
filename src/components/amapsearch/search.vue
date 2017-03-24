@@ -13,13 +13,14 @@
     <!--自定义的窗体 marker-content -->
     <div ref="marker-content" class="marker-content" v-show="selectedPoi.location.lat">
       <div class="marker-content-header">
+          <span v-show="selectedPoi.isMoved==false" class="notice-icon">&#9873;</span>
           <span class="notice">已将坐标定位为</span>
       </div>
       <div class="marker-info">
           <div class="marker-name">{{selectedPoi.name}}</div>
           <div class="marker-address">{{selectedPoi.address}}</div>
       </div>
-      <a class="btn btn-success" @click="setMarkerLocation(selectedPoi)">确定</a>
+      <a v-show="selectedPoi.isMoved"class="btn btn-success" @click="setMarkerLocation(selectedPoi)">确定</a>
     </div>
 
     <!--地图容器-->
@@ -123,8 +124,10 @@ module.exports = require('./search.ts').default
         width: 18px;
       }
     }
+    .notice-icon{
+      color: #06C1AE;
+    }
     .notice{
-      float: left;
       margin-left: 10px;
     }
   }

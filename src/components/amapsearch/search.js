@@ -52,8 +52,11 @@ exports.default = {
     },
     methods: {
         setMarkerLocation: function (location) {
-            this.$emit('pickedLocation', location);
-            // console.log(location.lng, location.lat);
+            this.selectedPoi.isMoved = false;
+            // 不做绑定
+            // if(showComfirmButton)
+            var loc = JSON.stringify(location);
+            this.$emit('pickedLocation', JSON.parse(loc));
         }
     },
     mounted: function () {
