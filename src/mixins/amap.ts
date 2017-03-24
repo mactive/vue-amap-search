@@ -278,7 +278,7 @@ export var amapmixinApp = {
                 var marker=new AMap.Marker({
                     position:poi.location,
                     map:vm.map,
-                    icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b'+(poiIndex)+'.png',
+                    icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_r'+(poiIndex)+'.png',
                     draggable: true
                 });
                 marker.content = vm.$refs["marker-content"];

@@ -3,6 +3,7 @@
     <amap-search 
       :searchCount="2"
       :autoConfirm="false"
+      :useClick="true"
       :width="800"
       :height="340"
       @userInput="handleUserInput"

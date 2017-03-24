@@ -59,6 +59,11 @@ exports.default = {
             type: Boolean,
             default: false,
             required: false
+        },
+        useClick: {
+            type: Boolean,
+            default: false,
+            required: false
         }
     },
     methods: {
@@ -78,11 +83,16 @@ exports.default = {
          * searchCount 默认为1
          */
         var searchCount = this.autoConfirm ? 1 : this.searchCount;
+        /**
+         * 如果支持用户点击, 点在哪里是哪里
+         * searchCount 默认为1
+         */
+        if (this.useClick) {
+            this.initMouseTools();
+            searchCount = 1;
+        }
         // 初始化 自动完成 ''代表默认全国
         this.initAutocomplate("autocomplate-input", searchCount, this.defaultCity);
-        // 开启单击的话 会影响拖动和marker 的click 
-        // TODO: 需要谨慎考虑一下
-        // this.initMouseTools();
     },
     mixins: [amap_1.amapmixinApp],
 };

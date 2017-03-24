@@ -61,9 +61,13 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 * width 宽度
   height 高度
 * searchCount 返回结果的数量
-* autoConfirm 是否自动确认点的地址, 默认 false . 
+* autoConfirm 是否自动确认点的地址, 默认 false 不开启 . 
 > 默认false, 用户点击确定后才会触发 handlePickedLocation 绑定的事件
 > 如果true,searchCount 会自动变成1
+* useClick 是否开启用户单机地图, 默认 false 不开启 . 
+> 默认false, 用户点击地图没有反应, 只能搜索结果后拖动图标
+> 如果true,searchCount 会自动变成1
+
 
 ### Event
 * handleUserInput 输入框中的值
@@ -73,12 +77,12 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 
 ## TODO: 
 - [x] 传入宽和高
-- [ ] 支持手点位置, 但是只能有一个搜索结果结果
+- [ ] 样式自包含, 不依赖于 bootstrap 3.3版本
+- [ ] 引入toast显示, 或者第三方的toast 显示,但是不要打包
+- [x] 支持手点位置, 但是只能有一个搜索结果结果
 - [x] 去掉sass 改用postcss
 - [x] 支持开关确认按钮, 点击确定关闭
 - [x] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
-- [ ] 样式自包含, 不依赖于 bootstrap 3.3版本
-- [ ] 引入toast显示, 或者第三方的toast 显示,但是不要打包
 - [x] 做成 amap-search 组件, 组件的实现可以用到mixin
 - [ ] 优化 webpack task
 - [ ] 输出组件的ts定义 d.ts文件
