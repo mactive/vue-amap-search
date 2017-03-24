@@ -1,9 +1,4 @@
 "use strict";
-// TODO: 使用的袋鼠UI的inform, 今后可能要换成Vue的
-var toastDelay = 2000;
-var toast = function (msg) {
-    console.log('taost' + msg);
-};
 exports.amapmixinApp = {
     data: function () {
         return {
@@ -87,7 +82,7 @@ exports.amapmixinApp = {
                             vm.placeSearch.clear();
                         }
                         else {
-                            toast("没有匹配结果<br>或者结果太多");
+                            console.log("没有匹配结果<br>或者结果太多");
                         }
                     });
                 });
@@ -133,7 +128,7 @@ exports.amapmixinApp = {
                     vm.placeSearch.clear();
                 }
                 else {
-                    toast("没有匹配结果<br>或者结果太多");
+                    console.log("没有匹配结果<br>或者结果太多");
                 }
             });
         },

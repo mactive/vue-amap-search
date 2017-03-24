@@ -1,7 +1,7 @@
 {
   "name": "vue-amap-search",
   "description": "vue2.x amap search component vue2.x高德地图搜索组件",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/lib/main.js",
   "author": "mactive <mactive@gmail.com>",
   "license": "MIT",

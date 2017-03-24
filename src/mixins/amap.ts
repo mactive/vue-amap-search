@@ -110,12 +110,6 @@ export type location = {
 
 type polygonPoint = number[];
 
-// TODO: 使用的袋鼠UI的inform, 今后可能要换成Vue的
-
-const toastDelay = 2000;
-const toast = function (msg: string) {
-    console.log('taost' + msg);
-};
 
 export var amapmixinApp = {
     data(){
@@ -208,7 +202,7 @@ export var amapmixinApp = {
                             // 清除搜索结果
                             vm.placeSearch.clear();
                         }else{
-                            toast("没有匹配结果<br>或者结果太多");
+                            console.log("没有匹配结果<br>或者结果太多");
                         }
                         
                     })
@@ -258,7 +252,7 @@ export var amapmixinApp = {
                     // 清除搜索结果
                     vm.placeSearch.clear();
                 } else {
-                    toast("没有匹配结果<br>或者结果太多");
+                    console.log("没有匹配结果<br>或者结果太多");
                 }
                 
             })
