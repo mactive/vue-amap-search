@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -19,40 +19,43 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules|vue\/src/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-          // transpileOnly: true
-        }
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+              // transpileOnly: true
+            }
+          }]
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          esModule: true,
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader'
-            }),
-            less:  ExtractTextPlugin.extract({
-              use: 'css-loader!less-loader',
-              fallback: 'vue-style-loader'
-            }),
+        use: [{
+          loader: 'vue-loader',
+          options: {
+            esModule: true,
+            loaders: {
+              css: ExtractTextPlugin.extract({
+                use: 'css-loader',
+                fallback: 'vue-style-loader'
+              }),
+              less: ExtractTextPlugin.extract({
+                use: 'css-loader!less-loader',
+                fallback: 'vue-style-loader'
+              }),
+            }
           }
-        }
+        }],
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel-loader',
-      //   exclude: /node_modules/
-      // },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]?[hash]'
+          }
+        }]
+
       }
     ]
   },

@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 module.exports = {
@@ -16,33 +16,41 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules|vue\/src/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-          // transpileOnly: true
-        }
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            // transpileOnly: true
+          }
+        }]
+
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          esModule: true,
-          loaders: {
-            'less': 'vue-style-loader!css-loader!less-loader',
+        use: [{
+          loader: 'vue-loader',
+          options: {
+            esModule: true,
+            loaders: {
+              'less': 'vue-style-loader!css-loader!less-loader',
+            }
           }
-          // other vue-loader options go here
-        }
+        }]
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: [{
+          loader: 'style-loader!css-loader'
+        }]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]?[hash]'
+          }
+        }]
       }
     ]
   },
