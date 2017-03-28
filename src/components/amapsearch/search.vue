@@ -3,7 +3,7 @@
     <!--自动输入框-->
     <div class="amap-search__autocomplate">
         <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
-        @keyup.enter="searchDefaultSuggestion"
+        @keyup.enter="searchDefaultSuggestion" autocomplete="off"
         placeholder="输入详细地址,越详细定位越精准"/>
         <a class="amap-search__search-btn" @click="searchDefaultSuggestion">
             搜索
