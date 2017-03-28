@@ -37,22 +37,15 @@ Vue.use(AmapSearch)
 
 html 中使用都是一样的,及得给amap-search设定宽和高,
 ```html
-<div class="amap-search">
-  <amap-search 
-    :searchCount="5" 
-    @userInput="handleUserInput"
-    @pickedLocation="handlePickedLocation">
-  </amap-search>
-</div>
-```
-`<style>` 标签中加入
-```css
-.amap-search{
-  position: relative;
-  width: 800px;
-  height: 540px;
-  margin: 0 auto;
-}
+<amap-search 
+  :searchCount="2"
+  :autoConfirm="false"
+  :useClick="true"
+  :width="800"
+  :height="340"
+  @userInput="handleUserInput"
+  @pickedLocation="handlePickedLocation">
+</amap-search>
 ```
 
 3. event and props
