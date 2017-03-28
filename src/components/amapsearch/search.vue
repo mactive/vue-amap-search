@@ -1,11 +1,11 @@
 <template>
   <div class="amap-search__container" :style="{width: width + 'px',height: height + 'px'}">
     <!--自动输入框-->
-    <div class="autocomplate-container">
+    <div class="amap-search__autocomplate">
         <input type="text" v-model="autocomplateInput" id="autocomplate-input" 
         @keyup.enter="searchDefaultSuggestion"
         placeholder="输入详细地址,越详细定位越精准"/>
-        <a class="search" @click="searchDefaultSuggestion">
+        <a class="amap-search__search-btn" @click="searchDefaultSuggestion">
             搜索
         </a>
     </div>
@@ -21,7 +21,7 @@
           <div class="marker-name">{{selectedPoi.name}}</div>
           <div class="marker-address">{{selectedPoi.address}}</div>
       </div>
-      <a v-show="selectedPoi.isMoved"class="btn btn-success" @click="setMarkerLocation(selectedPoi)">确定</a>
+      <a v-show="selectedPoi.isMoved" class="amap-search__confirm-btn" @click="setMarkerLocation(selectedPoi)">确定</a>
     </div>
 
     <!--地图容器-->
@@ -34,6 +34,11 @@ module.exports = require('./search.ts').default
 </script>
 
 <style lang="less">
+#amap-container{
+  width: inherit;
+  height: inherit;
+}
+
 .amap-search__container{
   position: relative;
   width: inherit;
@@ -41,12 +46,7 @@ module.exports = require('./search.ts').default
   margin: 0 auto;
 }
 
-#amap-container{
-  width: inherit;
-  height: inherit;
-}
-
-.autocomplate-container {
+.amap-search__autocomplate {
   width: 400px;
   z-index: 20;
   background-color: #ddf;
@@ -61,28 +61,30 @@ module.exports = require('./search.ts').default
   border-radius: 5px;
   height: 34px;
   line-height: 34px;
-
+  display: flex;
+  flex: 1;
+  justify-content:stretch;
 
   input[type="text"] {
     height: 25px;
     border: 0;
-    width: 360px;
+    width: auto;
     outline: none;
     height: inherit;
     line-height: inherit;
     font-size: 14px;
     padding-left: 15px;
     border-radius: 5px 0px 0px 5px;
+    flex: 1;
     &:focus{
       border: none !important;
     }
   }
 
-  a.search {
+  a.amap-search__search-btn {
     background: #06C1AE;
     color: #fff;
     border:0;
-    float:right;
     width: 40px;
     height: inherit;
     font-size: 12px;
@@ -90,23 +92,20 @@ module.exports = require('./search.ts').default
   }
 }
 
-
-.amap-sug-result {
+a.amap-search__confirm-btn{
+  background: #06C1AE;
+  color: #fff;
+  border:0;
+  min-width: 40px;
+  text-align: center;
+  font-size: 12px;
+  height: 34px;
+  line-height: 34px;
+  padding:0px 10px;
+  display: inline-block;
   border-radius: 5px;
-  box-shadow: 0px 2px 4px 0px silver;
-  border: none;
-
-  .auto-item{
-    font-size: 14px;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 15px;
-    .auto-item-span{
-      
-    }
-  }
 }
-
+/* 弹出信息窗体 */
 .marker-content{
   .marker-content-header{
     border-bottom: 1px solid #E5E5E5;
@@ -127,9 +126,11 @@ module.exports = require('./search.ts').default
     }
     .notice-icon{
       color: #06C1AE;
+      margin-right: 8px;
     }
     .notice{
-      margin-left: 10px;
+      font-size: 12px;
+      font-weight: bold;
     }
   }
   .marker-info{
@@ -146,6 +147,23 @@ module.exports = require('./search.ts').default
 }
 
 /*重写高德css*/
+
+.amap-sug-result {
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px 0px silver;
+  border: none;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  .auto-item{
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 15px;
+    .auto-item-span{
+      // 提示灰色文字
+    }
+  }
+}
+
 .amap-info-outer{
   border-radius: 5px !important; 
   border: none !important;
@@ -157,4 +175,5 @@ module.exports = require('./search.ts').default
 //   background-repeat: no-repeat !important;
 //   top: -3px  !important;
 // }
+
 </style>

@@ -32,4 +32,11 @@ module.exports = require('./App.ts').default
   color: #2c3e50;
   margin-top: 60px;
 }
+code{
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
 </style>
