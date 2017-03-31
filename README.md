@@ -93,13 +93,15 @@ npm link typescript
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:3030
 npm run dev
 
-# build for example project with minification
-npm run example
+# build for vue component with js, css with sourcemaps
+npm run build:lib
 
-# build for vue component with minification
-npm run build
+# build for example project with vue framework in
+npm run build:example
+
+
 
 ```

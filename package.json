@@ -25,9 +25,8 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.dev.conf.js --open",
-    "build:lib": "webpack --config build/webpack.build.conf.js --progress --hide-modules",
-    "build:example": "webpack --config build/webpack.example.config.js --progress --hide-modules"
-
+    "build:lib": "webpack --config build/webpack.build.conf.js --progress",
+    "build:example": "webpack --config build/webpack.example.conf.js --progress"
   },
   "dependencies": {
     "friendly-errors-webpack-plugin": "^1.6.1",
