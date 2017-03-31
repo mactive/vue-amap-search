@@ -2,7 +2,7 @@
   <div id="app">
     <amap-search 
       :searchCount="2"
-      :autoConfirm="false"
+      :autoConfirm="true"
       :useClick="true"
       :width="800"
       :height="340"

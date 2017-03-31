@@ -91,7 +91,7 @@ exports.default = {
             this.initMouseTools();
             searchCount = 1;
         }
-        // 初始化 自动完成 ''代表默认全国
+        // 初始化 自动完成 domId ''代表默认全国
         this.initAutocomplate("autocomplate-input", searchCount, this.defaultCity);
     },
     mixins: [amap_1.amapmixinApp],
