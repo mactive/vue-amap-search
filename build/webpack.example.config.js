@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: resolve('dist/example'),
-    publicPath: '/dist/example',
+    publicPath: '/dist/example', // used for devServer
     filename: 'build.js'
   },
   module: {

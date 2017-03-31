@@ -1,17 +1,20 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
+function assetsPath(_path) {
+  var assetsSubDirectory = 'static';
+  return path.posix.join(assetsSubDirectory, _path)
+}
+
 module.exports = {
-  entry: './src/components/amapsearch/search.vue',
+  entry: './src/main.ts',
   output: {
-    path: resolve('dist/lib'),
-    filename: 'main.js',
-    libraryTarget: "umd"
+    path: resolve('dist/example'),
+    filename: 'build.js'
   },
   module: {
     rules: [
@@ -28,51 +31,27 @@ module.exports = {
           }]
       },
       {
-        test: /\.vue$/,
-        use: [{
-          loader: 'vue-loader',
-          options: {
-            esModule: true,
-            loaders: {
-              css: ExtractTextPlugin.extract({
-                use: 'css-loader',
-                fallback: 'vue-style-loader'
-              }),
-              less: ExtractTextPlugin.extract({
-                use: 'css-loader!less-loader',
-                fallback: 'vue-style-loader'
-              }),
-            }
-          }
-        }],
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: assetsPath('img/[name].[hash:7].[ext]')
+        }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]?[hash]'
-          }
-        }]
-
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: assetsPath('fonts/[name].[hash:7].[ext]')
+        }
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin("[name].css")
-  ],
-  externals: {
-    "vue": "Vue"
   },
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     }
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    port: 3030
   },
   performance: {
     hints: false

@@ -71,16 +71,14 @@ html 中使用都是一样的,及得给amap-search设定宽和高,
 ## TODO: 
 - [x] 传入宽和高
 - [x] 样式自包含, 不依赖于 bootstrap 3.3版本
-- [ ] 自动完成鼠标上下选择第三下失效.
+- [x] 自动完成鼠标上下选择第三下失效.
 - [x] 支持手点位置, 但是只能有一个搜索结果结果
 - [x] 去掉sass 改用postcss
 - [x] 支持开关确认按钮, 点击确定关闭
 - [x] BUG: 拖动POI显示时候错位的问题, 应该是显示的问题
 - [x] 做成 amap-search 组件, 组件的实现可以用到mixin
-- [ ] 优化 webpack task
+- [x] 优化 webpack task
 - [ ] 输出组件的ts定义 d.ts文件
-- [ ] 整理目录符合components的规范
-- [ ] 多语言, 多版本, google map 规范
 
 
 

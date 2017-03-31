@@ -24,12 +24,15 @@
     "search"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.example.config.js --open --hot",
-    "example": "cross-env NODE_ENV=production webpack --config build/webpack.example.config.js --progress --hide-modules",
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js --open --hot",
+    "build:example": "cross-env NODE_ENV=production webpack --config build/webpack.example.config.js --progress --hide-modules",
+    "build:lib": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.2.1"
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "url-loader": "^0.5.8",
+    "vue": "^2.2.1",
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -39,12 +42,12 @@
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.2",
     "style-loader": "^0.14.1",
     "ts-loader": "^2.0.1",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.2",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   }
