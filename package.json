@@ -24,9 +24,10 @@
     "search"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js --open --hot",
-    "build:example": "cross-env NODE_ENV=production webpack --config build/webpack.example.config.js --progress --hide-modules",
-    "build:lib": "cross-env NODE_ENV=production webpack --config build/webpack.build.config.js --progress --hide-modules"
+    "dev": "webpack-dev-server --config build/webpack.dev.conf.js --open",
+    "build:lib": "webpack --config build/webpack.build.conf.js --progress --hide-modules",
+    "build:example": "webpack --config build/webpack.example.config.js --progress --hide-modules"
+
   },
   "dependencies": {
     "friendly-errors-webpack-plugin": "^1.6.1",
